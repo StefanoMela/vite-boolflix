@@ -24,33 +24,30 @@ export default {
     fetchMovies(moviesEndpoint) {
       axios.get(moviesEndpoint).then((response) => {
         store.movies = response.data.results.map((movie)=> {
-
           const { id, original_language, original_title, overview, poster_path, title, vote_average } = movie;
           return { id, original_language, original_title, overview, poster_path, title, vote_average };
         });
       }
     )},
+
     fetchTvSeries(tvSeriesEndpoint) {
       axios.get(tvSeriesEndpoint).then((response) => {
         store.tvSeries = response.data.results.map((tvSerie)=> {
 
           const { id, original_language, original_name, overview, poster_path, name, vote_average } = tvSerie;
-          return { id, original_language, original_name, overview, poster_path, name, vote_average };
+          return { id, original_language, original_title: original_name, overview, poster_path, title: name, vote_average };
         });
       }
     )},
+
+    handleSearch(queryString) {
+        const moviesSearchEndpoint = `${this.moviesEndpoint}?query=${queryString}&api_key=${this.apiKey}`;
+        const tvSerieSearchEndpoint = `${this.tvSeriesEndpoint}?query=${queryString}&api_key=${this.apiKey}`;
+
+        this.fetchMovies(moviesSearchEndpoint);
+        this.fetchTvSeries(tvSerieSearchEndpoint);
+      },
   },
-
-  handleSearch(queryString) {
-      // il parametro può anche cambiare nome rispetto al nome del componente
-      const moviesSearchEndpoint = `${this.moviesEndpoint}${this.apiKey}${queryString}`;
-      this.fetchMovies(moviesSearchEndpoint);
-    },
-
-  created() {
-    this.fetchMovies(this.moviesEndpoint)
-    this.fetchTvSeries(this.tvSeriesEndpoint)
-  }
 };
 </script>
 

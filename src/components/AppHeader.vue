@@ -15,7 +15,7 @@ export default {
 <template>
 <nav class="navbar bg-body-tertiary mb-5">
   <div class="container">
-    <a class="navbar-brand">Boolflix</a>
+    <a class="navbar-brand">Boolflix <font-awesome-icon icon="fa-solid fa-user-secret" /> </a>
     <form 
     @submit.prevent="$emit('form-submit',queryString)"
     class="d-flex" role="search">

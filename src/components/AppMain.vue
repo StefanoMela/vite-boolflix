@@ -1,14 +1,24 @@
 <script>
+import { store } from "../data/store";
+
 import AppCard from './AppCard.vue'
 
 export default {
+
+  data() {
+    return {
+      store,
+    }
+  },
+
 components: { AppCard }
 };
 </script>
 
 <template>
   <main class="container">
-    <AppCard />
+    <AppCard v-for="movie in store.movies" :content="movie"/>
+    <AppCard v-for="serie in store.tvSeries" :content="serie"/>
   </main>
 </template>
 

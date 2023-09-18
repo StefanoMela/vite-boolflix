@@ -16,20 +16,23 @@ components: { AppCard }
 </script>
 
 <template>
-  <main class="container">
-    <AppCard v-for="movie in store.movies" :content="movie"/>
-    <AppCard v-for="serie in store.tvSeries" :content="serie"/>
+  <main class="container-fluid">
+    <h3 class="text-center">Movies</h3>
+    <section class="movie container">
+      <AppCard v-for="movie in store.movies" :content="movie"/>
+    </section>
+    <h3 class="text-center my-3">Tv Series</h3>
+    <section class="tv-series container">
+      <AppCard v-for="serie in store.tvSeries" :content="serie"/>
+    </section>
   </main>
 </template>
 
 <style lang="scss" scoped>
 
-.container {
-
-  margin: 0 auto;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 </style>

@@ -31,8 +31,20 @@ export default {
     posterSrc () {
       if(!this.content.poster_path) return `${this.noPosterPath}`
       return `${this.imgUrl}${this.content.poster_path}`
-    }
+    },    
+      averageStars () {
+        return Math.ceil(this.content.vote_average / 2);
+      },
   },
+
+  methods: {
+
+    starClass (n) {
+      return n <= this.averageStars ? 'fa-solid fa-star' : 'fa-regular fa-star';
+    },
+
+  },
+
 };
 </script>
 
@@ -49,7 +61,11 @@ export default {
         <h6>Lingua:</h6>
         <img :src="flagSrc" :alt="content.original_language" />
       </div>
-      <span><strong>Voto: </strong> {{ content.vote_average }}</span>
+      <span>
+        <strong>Voto:</strong>
+        <font-awesome-icon :icon="starClass(n)" v-for="n in 5" />
+        {{ content.vote_average }}
+      </span>
       <p class="card-text">
         <strong>Descrizione:</strong> {{ content.overview }}
       </p>
@@ -62,5 +78,6 @@ export default {
   width: calc((100% / 4) - 1rem);
   overflow: auto;
   cursor: pointer;
+
 }
 </style>
